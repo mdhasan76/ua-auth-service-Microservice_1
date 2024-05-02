@@ -2,6 +2,7 @@
 import { Server } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
+import subscribeToEvents from './app/event';
 import config from './config/index';
 import { errorlogger, logger } from './shared/logger';
 import { RedisClient } from './shared/redis';
@@ -15,7 +16,10 @@ let server: Server;
 
 async function bootstrap() {
   try {
-    await RedisClient.connect();
+    await RedisClient.connect().then(() => {
+      console.log('Parant');
+      subscribeToEvents();
+    });
     await mongoose.connect(config.database_url as string);
     // logger.info(`🛢   Database is connected successfully`);
     console.log(`🛢   Database is connected successfully`);

@@ -47,3 +47,4 @@ export const academicSemesterFilterableFields = [
   'code',
   'year',
 ];
+export const ACADEMIC_SEMESTER_CREATED = 'academic-semester.created';

@@ -14,14 +14,15 @@ import {
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
 
-const createSemester = async (
-  payload: IAcademicSemester
-): Promise<IAcademicSemester> => {
-  if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semester Code');
-  }
-  const result = await AcademicSemester.create(payload);
-  return result;
+const createSemester = async (e: any): Promise<void> => {
+  await AcademicSemester.create({
+    title: e.title,
+    year: e.year,
+    code: e.code,
+    startMonth: e.startMonth,
+    endMonth: e.endMonth,
+    syncId: e.id,
+  });
 };
 
 const getSingleSemester = async (
