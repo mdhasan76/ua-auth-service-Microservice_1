@@ -16,7 +16,7 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
       enum: academicSemesterTitles,
     },
     year: {
-      type: String,
+      type: Number,
       required: true,
     },
     code: {
@@ -37,7 +37,7 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
     syncId: {
       type: String,
       required: true,
-    },
+    }
   },
   {
     timestamps: true,
@@ -52,6 +52,7 @@ academicSemesterSchema.pre('save', async function (next) {
     title: this.title,
     year: this.year,
   });
+  console.log(isExist)
   if (isExist) {
     throw new ApiError(
       httpStatus.CONFLICT,

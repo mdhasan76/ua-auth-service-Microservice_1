@@ -46,5 +46,6 @@ export const academicSemesterFilterableFields = [
   'title',
   'code',
   'year',
+  'syncId'
 ];
 export const ACADEMIC_SEMESTER_CREATED = 'academic-semester.created';
