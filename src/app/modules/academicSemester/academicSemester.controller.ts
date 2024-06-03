@@ -10,7 +10,7 @@ import { AcademicSemesterService } from './academicSemester.service';
 
 const createSemester = catchAsync(async (req: Request, res: Response) => {
   const { ...academicSemesterData } = req.body;
-  const result = await AcademicSemesterService.createSemester(
+  const result: any = await AcademicSemesterService.createSemester(
     academicSemesterData
   );
 
