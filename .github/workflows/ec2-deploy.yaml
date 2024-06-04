@@ -1,0 +1,26 @@
+name: EC2 Deploy
+
+on:
+  workflow_run:
+    workflows: ['Publish Docker image']
+    types: [completed]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+  steps:
+    - name: Stop the old container
+      run: docker stop um-auth-service || true
+
+    - name: Delete old container
+      run: docker rm um-auth-service || true
+
+    - name: Delete old image
+      run: docker rmi "${{secrets.DOCKERHUB_USER_NAME}}"/um-auth-service:latest || true
+
+    - name: pull image form docker hub
+      run: docker pull "${{secrets.DOCKERHUB_USER_NAME}}"/um-auth-service:latest
+
+    - name: Run the image
+      run: docker compose up -d
