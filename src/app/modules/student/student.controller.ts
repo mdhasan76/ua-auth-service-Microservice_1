@@ -33,7 +33,7 @@ const getAllStudents = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IStudent[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Students fetched successfully !',
+    message: 'Students fetched successfully Using docker!',
     meta: result.meta,
     data: result.data,
   });
